@@ -2,7 +2,7 @@
 
 from threading import Thread, Lock
 from time import sleep
-from color import *
+from .color import *
 
 WIN=True; _Attr=None
 try: import msvcrt #Windows

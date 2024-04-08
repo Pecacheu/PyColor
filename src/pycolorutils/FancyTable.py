@@ -1,7 +1,7 @@
 #PyColorUtils - Fancy Table Printing; GNU GPL v3
 
 import re
-from color import *
+from .color import *
 
 def _contains(arr, itm):
 	if not arr: return
