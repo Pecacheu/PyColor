@@ -1,4 +1,4 @@
-#PyColorUtils - Fancy Table Printing; GNU GPL v3
+#PyColorUtils; 2024 Pecacheu, MIT
 
 import re
 from .color import *

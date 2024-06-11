@@ -1,4 +1,4 @@
-#PyColorUtils; GNU GPL v3
+#PyColorUtils; 2024 Pecacheu, MIT
 
 from threading import Thread, Lock
 from time import sleep

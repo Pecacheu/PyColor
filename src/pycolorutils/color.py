@@ -1,4 +1,4 @@
-#PyColorUtils; GNU GPL v3
+#PyColorUtils; 2024 Pecacheu, MIT
 
 import sys, os, atexit as ae
 from traceback import print_exception
