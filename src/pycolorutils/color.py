@@ -33,34 +33,39 @@ class C:
 _Ex = []
 
 def msg(*a):
-	a=list(a); n=len(a)-1
-	if isinstance(a[n], str): a[n]+=C.Rst+'\n'
-	else: a.append(C.Rst+'\n')
-	a=' '.join(a)
-	sys.stdout.write(a)
-	if C.onMsg: C.onMsg(a)
+	s=[str(d) for d in a]
+	s=' '.join(s)+C.Rst+'\n'
+	sys.stdout.write(s)
+	if C.onMsg: C.onMsg(s)
 
 def err(e,ex=0):
-	e=C.Rst+C.Red+e+C.Rst+'\n'
+	e=C.Rst+C.Red+str(e)+C.Rst+'\n'
 	sys.stderr.write(e)
 	if C.onErr: C.onErr(e)
-	if ex: sys.exit(ex)
+	if ex: exit(ex)
 
-def exitClean():
+def exit(ex: int=0):
+	_exit()
+	sys.exit(ex)
+
+def _exit():
 	for f in _Ex: f()
 	_Ex.clear()
 
-def atexit(f): _Ex.append(f)
-ae.register(exitClean)
+def atexit(f: callable): _Ex.append(f)
+ae.register(_exit)
 
-def execMain(main):
+def execMain(main: callable):
 	try: main()
 	except KeyboardInterrupt: pass
 	except Exception as er: print_exception(er)
-	exitClean()
+	_exit()
 
 def eInfo(e: Exception):
 	tb=e.__traceback__
 	while tb.tb_next: tb=tb.tb_next
 	fn = os.path.split(tb.tb_frame.f_code.co_filename)[1]
 	return f"{type(e).__name__} @ {fn}:{tb.tb_lineno}: {e}"
+
+def getDictKey(d: dict, val):
+	return list(d.keys())[list(d.values()).index(val)]
