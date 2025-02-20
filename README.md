@@ -33,7 +33,8 @@ Format strings for console printing.
 # Logging & Errors
 
 - `msg(*m)` Like `print()` but automatically appends `C.Rst` to the end.
-- `err(e: Any, ex: int=0)` Prints an error to the console in red. If `ex` is non-zero, also exits with exit code.
+- `err(e: Any, ex: int=0)` Prints an error to the console (stderr) in red. If `ex` is non-zero, also exits with exit code.
+- `warn(w: Any)` Prints a warning to the console (stderr) in yellow.
 - `eInfo(e: Exception)` Returns a human-readable string for the exception.
 - `onMsg = callable(m: str)` If defined, redirects output from `msg()`
 - `onErr = callable(e: str)` If defined, redirects output from `err()`

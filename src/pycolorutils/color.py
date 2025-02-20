@@ -39,10 +39,15 @@ def msg(*a):
 	if C.onMsg: C.onMsg(s)
 
 def err(e,ex=0):
-	e=C.Rst+C.Red+str(e)+C.Rst+'\n'
+	e=f"{C.Rst+C.Red}{e}{C.Rst}\n"
 	sys.stderr.write(e)
 	if C.onErr: C.onErr(e)
 	if ex: exit(ex)
+
+def warn(w):
+	w=f"{C.Rst+C.Ylo+C.Un}Warning: {w}{C.Rst}\n"
+	sys.stderr.write(w)
+	if C.onErr: C.onErr(w)
 
 def exit(ex: int=0):
 	_exit()
