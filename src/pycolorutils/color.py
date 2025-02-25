@@ -67,10 +67,16 @@ def execMain(main: callable):
 	_exit()
 
 def eInfo(e: Exception):
-	tb=e.__traceback__
-	while tb.tb_next: tb=tb.tb_next
-	fn = os.path.split(tb.tb_frame.f_code.co_filename)[1]
-	return f"{type(e).__name__} @ {fn}:{tb.tb_lineno}: {e}"
+	loc=note=''
+	tb=getattr(e, '__traceback__', None)
+	nl=getattr(e, '__notes__', None)
+	if tb:
+		while tb.tb_next: tb=tb.tb_next
+		fn = os.path.split(tb.tb_frame.f_code.co_filename)[1]
+		loc = f" @ {fn}:{tb.tb_lineno}"
+	if nl:
+		note = f" ({', '.join(nl)})"
+	return f"{type(e).__name__}{loc}: {e}{note}"
 
 def getDictKey(d: dict, val):
 	return list(d.keys())[list(d.values()).index(val)]
